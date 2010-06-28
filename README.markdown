@@ -18,6 +18,7 @@ Creating a database is easy, you just call the nStore function to generate a col
 
     // Insert a new document with key "creationix"
     users.save("creationix", {name: "Tim Caswell": age: 28}, function (err) {
+        if (err) { throw err; }
         // The save is finished and written to disk safely
     });
 
@@ -26,7 +27,8 @@ Creating a database is easy, you just call the nStore function to generate a col
 Assuming the previous code was run, a file will now exist with the persistent data inside it.
 
     // Insert a new document with key "creationix"
-    users.get("creationix", function (err, doc) {
+    users.get("creationix", function (err, doc, meta) {
+        if (err) { throw err; }
         // You now have the document
     });
 
@@ -47,6 +49,10 @@ Sometimes you want to search a database for certain documents and you don't know
         // that's all the results
     });
 
+    userStream.addListener('error', function (err) {
+        throw err;
+    });
+
 This is a full stream interface complete with `pause` and `resume`.  Any rows that are read from the disk while it's paused will be queued internally, but will call the pre-filter function right away so it doesn't buffer results we don't want to keep.
 
 ## Removing a document
@@ -54,6 +60,7 @@ This is a full stream interface complete with `pause` and `resume`.  Any rows th
 Remove is by key only.
 
     // Remove our new document
-    users.remove(1, function (err) {
-        // The document at key 1 was removed
+    users.remove("creationix", function (err) {
+        if (err) { throw err; }
+        // The document at key "creationix" was removed
     });
