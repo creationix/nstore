@@ -7,6 +7,7 @@ assert.equal(users.length, 3, "There should be 3 users");
 expect("remove");
 users.remove("creationix", function (err) {
   fulfill("remove");
+  if (err) throw err;
   assert.equal(users.length, 2, "There should be 2 users now");
   expect("get fail");
   users.get("creationix", function (err, doc, meta) {
@@ -19,7 +20,7 @@ users.remove("creationix", function (err) {
   expect("get");
   users.get("ryah", function (err, doc, meta) {
     fulfill("get");
-    assert.equal(err.errno, process.ENOENT, "Error instance should be ENOENT");
+    if (err) throw err;
     assert.ok(doc, "doc loaded");
     assert.ok(meta, "meta loaded");
   });
