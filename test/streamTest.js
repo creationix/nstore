@@ -35,3 +35,5 @@ expect("filtered end");
 filteredStream.addListener("end", function () {
   fulfill("filtered end");
 });
+
+// TODO test pause and resume

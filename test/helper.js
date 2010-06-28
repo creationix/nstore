@@ -23,6 +23,7 @@ process.addListener('exit', function () {
 
 
 function clean() {
+  fs.writeFileSync("fixtures/toDelete.db", fs.readFileSync("fixtures/sample.db", "binary"), "binary");
   try {
     fs.unlinkSync('fixtures/new.db');
   } catch (err) {
