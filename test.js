@@ -9,18 +9,30 @@ checkRam("After loading db with " + users.length + " documents");
 function checkRam(message) {
     // sys.puts(message + ":\n" + sys.inspect(process.memoryUsage()));
 }
-
-function p(err, arg) {
-    if (err) {
-        throw err;
-    }
-    return sys.puts(sys.inspect(arg));
+function p(val) {
+    sys.error(sys.inspect(val));
 }
-users.get(2, p);
 
-users.save(1, {hello:"World1"});
-users.save(2, {hello:"World2"});
-users.save(3, {hello:"World3"});
+users.save(1, {name:"Tim Caswell",age:28}, function (err) {
+    if (err) throw err;
+    sys.debug("Saved");
+    users.get(1, function (err, doc, meta) {
+        if (err) throw err;
+        sys.debug("Loaded");
+        p([doc, meta]);
+        users.remove(1, function (err) {
+            if (err) throw err;
+            sys.debug("Deleted");
+            
+        });
+    });
+});
+
+// users.get(2, p);
+// 
+// users.save(1, {hello:"World1"});
+// users.save(2, {hello:"World2"});
+// users.save(3, {hello:"World3"});
 
 // var num = 1000000;
 // var left = num;
