@@ -1,9 +1,9 @@
 var sys = require('sys'),
-    Collection = require('./lib/agregar'),
+    nStore = require('./lib/nstore'),
     Step = require('step');
 
 checkRam("Startup");
-var users = new Collection("data/users.db");
+var users = new nStore("data/users.db");
 checkRam("After loading db with " + users.length + " documents");
 
 function checkRam(message) {
