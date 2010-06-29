@@ -25,3 +25,10 @@ users.remove("creationix", function (err) {
     assert.ok(meta, "meta loaded");
   });
 });
+
+expect("fail");
+users.remove("baduser", function (err) {
+    fulfill("fail");
+    assert.ok(err instanceof Error, "error is an Error");
+    if (err.errno !== process.ENOENT) throw err;
+});
