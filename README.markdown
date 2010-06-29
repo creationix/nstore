@@ -6,15 +6,17 @@ A simple in-process document store for node.js. nStore uses a safe append-only d
 
 All the examples assume this basic setup.  Currently it reads an existing file if it exists using blocking I/O.  Then means the nStore function is blocking and doesn't need a callback.  The cost of this is that large databases take a long time (relatively) to load.  My test with a 1,000,000 document collection takes about 14 seconds to load.  I may change this api in the future to use the faster non-blocking I/O.
 
+Creating a database is easy, you just call the nStore function to generate a collection object.
+
     // Load the library
     var nStore = require('nstore');
     // Create a store
     var users = nStore('data/users.db');
 
 
-## Creating a database
+## Creating a document
 
-Creating a database is easy, you just call the nStore function to generate a collection object.  Then call save to insert/update documents
+To insert/update documents, just call the save function on the collection.
 
     // Insert a new document with key "creationix"
     users.save("creationix", {name: "Tim Caswell": age: 28}, function (err) {
@@ -22,7 +24,13 @@ Creating a database is easy, you just call the nStore function to generate a col
         // The save is finished and written to disk safely
     });
 
-## Loading a database
+    // Or insert with auto key
+    users.save(null, {name: "Bob"}, function (err, meta) {
+        if (err) { throw err; }
+        // You now have the insert id
+    });
+
+## Loading a document
 
 Assuming the previous code was run, a file will now exist with the persistent data inside it.
 
@@ -40,11 +48,11 @@ Sometimes you want to search a database for certain documents and you don't know
     var userStream = users.stream(function (doc, meta) {
         return doc.age > 18 && doc.age < 40;
     });
-    
+
     userStream.addListener('data', function (doc, meta) {
         // Do something with the document
     });
-    
+
     userStream.addListener('end', function () {
         // that's all the results
     });
