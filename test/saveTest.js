@@ -17,7 +17,6 @@ documents.save("thesis", thesis, function (err) {
   documents.get("thesis", function (err, doc, meta) {
     fulfill("get");
     if (err) throw err;
-    p(arguments);
     assert.deepEqual(doc, thesis, "Loading it back should look the same");
     assert.equal(meta.key, "thesis", "The meta should have the key");
   });

@@ -21,7 +21,7 @@ var filteredStream = users.stream(function (doc, meta) {
   fulfill("filter");
   assert.ok(doc, "Streams documents");
   assert.ok(meta, "Streams meta");
-  return doc.age = 28;
+  return doc.age === 28;
 });
 
 expect("filtered data");
