@@ -34,6 +34,16 @@ documents.save("thesis", thesis, function (err) {
       assert.deepEqual(doc, thesis, "Loading it back should look the same");
       assert.deepEqual(newMeta, meta, "The meta should have the key");
     });
+
+    setTimeout(function () {
+      expect("delayed save");
+      documents.save("slow", thesis, function (err, meta) {
+        fulfill("delayed save");
+        if (err) throw err;
+        assert.equal(documents.length, 3, "There should be 3 documents in the collection");
+      });
+    });
+
   });
 
 });
