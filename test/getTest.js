@@ -10,6 +10,14 @@ users.get("creationix", function (err, doc, meta) {
   assert.deepEqual(meta, {key:"creationix",created:1277765030789}, "Meta Loaded");
 });
 
+expect("get2");
+users.get("tjholowaychuk", function (err, doc, meta) {
+  fulfill("get2");
+  if (err) throw err;
+  assert.deepEqual(doc, {name:"TJ Holowaychuck",country:"Canada"}, "Document loaded");
+  assert.deepEqual(meta, {key:"tjholowaychuk"}, "Meta Loaded");
+});
+
 expect("get missing");
 users.get("bob", function (err, doc, meta) {
   fulfill("get missing");
