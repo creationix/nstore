@@ -62,6 +62,19 @@ Sometimes you want to search a database for certain documents and you don't know
 
 This is a full stream interface complete with `pause` and `resume`.  Any rows that are read from the disk while it's paused will be queued internally, but will call the pre-filter function right away so it doesn't buffer results we don't want to keep.
 
+## Searching for documents
+
+You can search for documents using streams with a filter, but sometimes it's easier to just get the aggregate result after filtering.  For this you can use the `all()` function.
+
+    // Search for several things at once
+    users.stream(function (doc, meta) {
+        return doc.age > 18 && doc.age < 40;
+    }, function (err, docs, metas) {
+      if (err) throw err;
+      // Do something with the results
+    });
+
+
 ## Removing a document
 
 Remove is by key only.
