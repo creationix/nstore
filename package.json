@@ -4,5 +4,5 @@
     "keywords": ["nosql", "database"],
     "main" : "./lib/nstore",
     "author": "Tim Caswell <tim@creationix.com>",
-    "version": "0.1.1"
+    "version": "0.1.2"
 }
