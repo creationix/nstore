@@ -1,6 +1,6 @@
 # nStore
 
-A simple in-process document store for node.js. nStore uses a safe append-only data format for quick inserts, updates, and deletes.  Also a index of all documents and their exact location on the disk is stored in in memory for fast reads of any document.  This append-only file format means that you can do online backups of the datastore using simple tools like rsync.  The file is always in a consistent state.
+A simple in-process key/value document store for node.js. nStore uses a safe append-only data format for quick inserts, updates, and deletes.  Also a index of all documents and their exact location on the disk is stored in in memory for fast reads of any document.  This append-only file format means that you can do online backups of the datastore using simple tools like rsync.  The file is always in a consistent state.
 
 ## Setup
 
