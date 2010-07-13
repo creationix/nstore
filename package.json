@@ -1,0 +1,8 @@
+{
+    "name": "nStore",
+    "description": "nStore is a simple, in-process key/value database for node.js.",
+    "keywords": ["nosql", "database"],
+    "main" : "./lib/nstore",
+    "author": "Tim Caswell <tim@creationix.com>",
+    "version": "0.1.0"
+}
