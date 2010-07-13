@@ -23,6 +23,8 @@ users.remove("creationix", function (err) {
     if (err) throw err;
     assert.ok(doc, "doc loaded");
     assert.ok(meta, "meta loaded");
+    users.clear();
+    assert.equal(users.length, 0, "There should be no users now");
   });
 });
 

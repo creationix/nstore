@@ -7,7 +7,7 @@ users.get("creationix", function (err, doc, meta) {
   fulfill("get");
   if (err) throw err;
   assert.deepEqual(doc, {name:"Tim Caswell",age:28}, "Document loaded");
-  assert.deepEqual(meta, {key:"creationix",created:1277765030789}, "Meta Loaded");
+  assert.deepEqual(meta, {key:"creationix"}, "Meta Loaded");
 });
 
 expect("get2");

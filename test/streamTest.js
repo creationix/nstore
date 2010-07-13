@@ -28,7 +28,7 @@ expect("filtered data");
 filteredStream.addListener("data", function (doc, meta) {
   fulfill("filtered data");
   assert.deepEqual(doc, {name:"Tim Caswell",age:28}, "Document loaded");
-  assert.deepEqual(meta, {key:"creationix",created:1277765030789}, "Meta Loaded");
+  assert.deepEqual(meta, {key:"creationix"}, "Meta Loaded");
 });
 
 expect("filtered end");
