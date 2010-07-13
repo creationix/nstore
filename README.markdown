@@ -13,7 +13,6 @@ Creating a database is easy, you just call the nStore function to generate a col
     // Create a store
     var users = nStore('data/users.db');
 
-
 ## Creating a document
 
 To insert/update documents, just call the save function on the collection.
@@ -72,3 +71,14 @@ Remove is by key only.
         if (err) { throw err; }
         // The document at key "creationix" was removed
     });
+
+
+### Special compaction filter
+
+There are times that you want to prune stale data from a database, like when using nStore to store session data.  The problem with looping over the index keys and calling `remove()` on them is that it bloats the file. Deletes are actually appends to the file.  Instead nStore exposes a special filter function that, if specified, will filter the data when compacting the data file.
+
+    // Prune any items that have a doc.lastAccess older than 1 hour.
+    var session = nStore('data/sessions.db', function (doc, meta) {
+      return doc.lastAccess > Date.now() - 360000;
+    });
+
