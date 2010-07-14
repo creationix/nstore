@@ -67,7 +67,7 @@ This is a full stream interface complete with `pause` and `resume`.  Any rows th
 You can search for documents using streams with a filter, but sometimes it's easier to just get the aggregate result after filtering.  For this you can use the `all()` function.
 
     // Search for several things at once
-    users.stream(function (doc, meta) {
+    users.all(function (doc, meta) {
         return doc.age > 18 && doc.age < 40;
     }, function (err, docs, metas) {
       if (err) throw err;
