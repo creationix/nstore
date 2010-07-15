@@ -33,7 +33,7 @@ To insert/update documents, just call the save function on the collection.
 
 Assuming the previous code was run, a file will now exist with the persistent data inside it.
 
-    // Insert a new document with key "creationix"
+    // Load the document with the key "creationix"
     users.get("creationix", function (err, doc, meta) {
         if (err) { throw err; }
         // You now have the document
