@@ -1,4 +1,4 @@
-
+require('proto');
 global.sys = require('sys');
 global.assert = require('assert');
 global.fs = require('fs');

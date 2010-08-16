@@ -1,5 +1,5 @@
-{"name":"Tim Caswell","age":28}	{"key":"creationix"}
-{"name":"TJ Holowaychuck","country":"Canada"}	{"key":"tjholowaychuk"}
-{"name":"Ryan Dahl","project":"node.js"}	{"key":"ryah"}
-{"name":"Bob"}	{"key":"bob"}
-	{"key":"bob"}
+creationix	{"name":"Tim Caswell","age":28}
+tjholowaychuk	{"name":"TJ Holowaychuck","country":"Canada"}
+ryah	{"name":"Ryan Dahl","project":"node.js"}
+bob	{"name":"Bob"}
+bob	
