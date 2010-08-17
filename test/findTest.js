@@ -39,6 +39,14 @@ var store = nStore.new('fixtures/new.db', function () {
     },
     function (err, keys1, keys2) {
       fulfill("two");
+
+      expect("all");
+      store.all(function (err, result) {
+        if (err) throw err;
+        fulfill("all");
+        assert.equal(Object.keys(result).length, 200, "There should be 200 rows");
+      });
+
       if (err) throw err;
       assert.equal(store.length, 200, "There should be 200 records now");
       var group = this.group();
