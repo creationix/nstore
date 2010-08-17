@@ -72,6 +72,69 @@ You can also quickly clear the entire collection
 
 This clears all the keys and triggers a compaction.  Only after the compact finishes is the data truly deleted from the disk, however any further queries cannot see the old data anymore.
 
+## Querying the database
+
+There are no indexes, however, nStore provides a simple query interface to get at data quickly and easily.  You can filter using `condition` expressions or plain functions.
+
+### Query as a single callback
+
+For convenience you can pass in a callback and get the results as a single object.
+
+    // Using a callback for buffered results
+    users.find({age: 28}, function (err, results) {
+      // results is an object keyed by document key with the document as the value
+    });
+
+
+### Query using streams.
+
+Also you can stream results.
+
+    var stream = users.find({age: 28});
+    stream.on("document", function (doc, key) {
+      // This is a single document
+    });
+    stream.on("end", function () {
+      // No more data is expected
+    })
+
+### `all` shortcut
+
+If you want no condition you can use the `all()` shortcut.
+
+    users.all(function (err, results) {
+      // All the users are now in a single object.
+    });
+
+### Structure of `condition` expressions.
+
+A simple condition is pairs of key's and values.  This builds a condition where all columns named by the key must equal the corresponding value.
+
+This matches rows where `name` is `"Tim"` and `age` is `27`:
+
+    {name: "Tim", age: 27}
+
+If a key contains space, then the operator after it is used instead of equal.
+
+This matches rows where `age` is greater than `18` and `age` is less than `50`:
+
+    {"age >": 18, "age <": 50}
+
+The supported operators are:
+
+ - `<` - less than
+ - `<=` - less than or equal to
+ - `>=` - greater than or equal to
+ - `>` - greater than
+ - `!=` or `<>` - not equal to
+  
+If an array of hash-objects is passed in, then each array item is grouped and ORed together.
+
+This matches `name` is `"Tim"` or `age` < `8`:
+
+    [{name: "Tim"}, {"age <": 8}]
+
+
 ## Special compaction filter
 
 There are times that you want to prune stale data from a database, like when using nStore to store session data.  The problem with looping over the index keys and calling `remove()` on them is that it bloats the file. Deletes are actually appends to the file.  Instead nStore exposes a special filter function that, if specified, will filter the data when compacting the data file.
