@@ -1,7 +1,8 @@
+require.paths.unshift('../lib');
 global.assert = require('assert');
 global.fs = require('fs');
 global.Step = require('step');
-global.nStore = require('../lib/nstore');
+global.nStore = require('nstore');
 
 // A mini expectations module to ensure expected callback fire at all.
 var expectations = {};
