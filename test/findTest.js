@@ -1,7 +1,7 @@
 require('./helper');
 
 // Enable the query plugin
-nStore = nStore.extend(require('nstore/query'));
+nStore = nStore.extend(require('nstore/query')());
 
 var queries = [
   [{age: 50}, 2],
