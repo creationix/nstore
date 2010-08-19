@@ -1,12 +1,7 @@
-require('proto');
-global.sys = require('sys');
 global.assert = require('assert');
 global.fs = require('fs');
 global.Step = require('step');
 global.nStore = require('../lib/nstore');
-global.p = function () {
-  sys.error(sys.inspect.apply(sys, arguments));
-};
 
 // A mini expectations module to ensure expected callback fire at all.
 var expectations = {};

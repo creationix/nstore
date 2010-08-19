@@ -1,6 +1,6 @@
 require('./helper');
 
-console.log(sys.inspect(process.memoryUsage()));
+console.dir(process.memoryUsage());
 
 var counter = 0;
 const NUM = 1000000;
@@ -18,5 +18,5 @@ var documents = nStore.new('fixtures/new.db', function () {
 
 
 process.on('exit', function () {
-  console.log(sys.inspect(process.memoryUsage()));
+  console.dir(process.memoryUsage());
 });
