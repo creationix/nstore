@@ -1,5 +1,7 @@
 require('./helper');
 
+// Enable the cache plugin
+nStore = nStore.extend(require('nstore/cache')(2000));
 // Enable the query plugin
 nStore = nStore.extend(require('nstore/query')());
 
