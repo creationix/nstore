@@ -11,8 +11,7 @@ Creating a database is easy, you just call the nStore function to generate a col
     // Load the library
     var nStore = require('nstore');
     // Create a store
-    var users = Object.create(nStore);
-    users.initialize('data/users.db', function () {
+    var users = nStore.new('data/users.db', function () {
       // It's loaded now
     });
 
