@@ -1,3 +1,4 @@
+Object.freeze(Object.prototype);
 require.paths.unshift('../lib');
 global.assert = require('assert');
 global.fs = require('fs');
