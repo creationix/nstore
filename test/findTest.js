@@ -1,5 +1,8 @@
 require('./helper');
 
+// Enable the query plugin
+require('../lib/nstore/query');
+
 var queries = [
   [{age: 50}, 2],
   [{"age =": 50}, 2],
