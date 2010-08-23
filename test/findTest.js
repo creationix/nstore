@@ -1,7 +1,8 @@
 require('./helper');
 
 // Enable the cache plugin
-nStore = nStore.extend(require('nstore/cache')(2000));
+// (that only caches some of the values to test the cache miss)
+nStore = nStore.extend(require('nstore/cache')(150));
 // Enable the query plugin
 nStore = nStore.extend(require('nstore/query')());
 
@@ -24,7 +25,7 @@ var queries = [
   [undefined, 200],
   [[], 200]
 ];
-
+var start;
 
 expect("load");
 var store = nStore.new('fixtures/new.db', function () {
@@ -35,6 +36,7 @@ var store = nStore.new('fixtures/new.db', function () {
   Step(
     function () {
       fulfill("one");
+      start = Date.now();
       var group1 = this.group();
       var group2 = this.group();
       for (var i = 0; i < 100; i++) {
@@ -44,6 +46,8 @@ var store = nStore.new('fixtures/new.db', function () {
     },
     function (err, keys1, keys2) {
       fulfill("two");
+      console.log("Insert %s ms", Date.now() - start);
+      start = Date.now();
 
       expect("all");
       store.all(function (err, result) {
@@ -61,6 +65,7 @@ var store = nStore.new('fixtures/new.db', function () {
     },
     function (err, results) {
       fulfill("three");
+      console.log("Query %s ms", Date.now() - start);
       if (err) throw err;
       assert.equal(results.length, queries.length, "All queries should come back");
       expect("result");
