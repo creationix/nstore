@@ -2,7 +2,7 @@ require('./helper');
 
 // Enable the cache plugin
 // (that only caches some of the values to test the cache miss)
-nStore = nStore.extend(require('nstore/cache')(150));
+nStore = nStore.extend(require('nstore/cache')(1900));
 // Enable the query plugin
 nStore = nStore.extend(require('nstore/query')());
 
@@ -11,19 +11,19 @@ var queries = [
   [{"age =": 50}, 2],
   [{"age <": 50}, 100],
   [{"age <=": 50}, 102],
-  [{"age >=": 50}, 100],
-  [{"age >": 50}, 98],
-  [{"age !=": 50}, 198],
-  [{"age <>": 50}, 198],
+  [{"age >=": 50}, 1900],
+  [{"age >": 50}, 1898],
+  [{"age !=": 50}, 1998],
+  [{"age <>": 50}, 1998],
   [{age: 50, name: "USER 50"}, 1],
   [{age: 50, name: "USER 51"}, 0],
   [[{age: 50}, {name: "USER 51"}], 3],
   [[{age: 50}, {name: "USER 50"}], 2],
   [{"age <": 50, "age >=": 40}, 20],
-  [{"name <": "USER 50", "name >": "USER 40"}, 10],
+  [{"name <": "USER 50", "name >": "USER 40"}, 110],
   [[{age: 50}, {"name >": "USER 50", "age <": 60}], 74],
-  [undefined, 200],
-  [[], 200]
+  [undefined, 2000],
+  [[], 2000]
 ];
 var start;
 
@@ -39,7 +39,7 @@ var store = nStore.new('fixtures/new.db', function () {
       start = Date.now();
       var group1 = this.group();
       var group2 = this.group();
-      for (var i = 0; i < 100; i++) {
+      for (var i = 0; i < 1000; i++) {
         store.save(null, {name: "USER " + i, age: i}, group1());
         store.save(null, {name: "User " + i, age: i}, group2());
       }
@@ -53,11 +53,11 @@ var store = nStore.new('fixtures/new.db', function () {
       store.all(function (err, result) {
         if (err) throw err;
         fulfill("all");
-        assert.equal(Object.keys(result).length, 200, "There should be 200 rows");
+        assert.equal(Object.keys(result).length, 2000, "There should be 200 rows");
       });
 
       if (err) throw err;
-      assert.equal(store.length, 200, "There should be 200 records now");
+      assert.equal(store.length, 2000, "There should be 200 records now");
       var group = this.group();
       queries.forEach(function (pair, i) {
         store.find(pair[0], group());
