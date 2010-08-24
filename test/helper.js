@@ -35,4 +35,4 @@ function clean() {
 clean();
 
 // Clean on exit too
-process.addListener('exit', clean);
+// process.addListener('exit', clean);
