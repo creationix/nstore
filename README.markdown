@@ -2,6 +2,12 @@
 
 A simple in-process key/value document store for node.js. nStore uses a safe append-only data format for quick inserts, updates, and deletes.  Also a index of all documents and their exact location on the disk is stored in in memory for fast reads of any document.  This append-only file format means that you can do online backups of the datastore using simple tools like rsync.  The file is always in a consistent state.
 
+## Warning
+
+This library is still under development.  There are bugs.  APIs will change.  Docs may be wrong.
+
+Keep in mind this is something I make in my free time and that's something I've had very little of lately thanks to my many other projects.  I would love for someone with database and javascript smarts to partner with to make nStore super awesome.
+
 ## Setup
 
 All the examples assume this basic setup. Loading the database is async so there is a callback for when it's safe to query the database.
@@ -15,13 +21,6 @@ Creating a database is easy, you just call the nStore function to generate a col
       // It's loaded now
     });
 
-If you use the [proto][] extensions then it's a single call:
-
-    require('proto');
-    var nStore = require('nstore')
-    var users = nStore.new('data/users.db', function () {
-      // It's loaded
-    });
 
 ## Creating a document
 

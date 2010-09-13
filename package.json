@@ -1,8 +1,22 @@
 {
-    "name": "nStore",
+    "name": "nstore",
+    "version": "0.3.0",
     "description": "nStore is a simple, in-process key/value database for node.js.",
-    "keywords": ["nosql", "database"],
-    "main" : "./lib/nstore",
+    "tags": ["nosql", "database"],
     "author": "Tim Caswell <tim@creationix.com>",
-    "version": "0.2.1"
+    "repository": {
+      "type": "git",
+      "url": "http://github.com/creationix/nstore.git"
+    },
+    "bugs": "http://github.com/creationix/nstore/issues",
+    "engines": ["node >= 0.2.0"],
+    "modules": {
+      "index": "lib/nstore.js",
+      "cache": "lib/nstore/cache.js",
+      "query": "lib/nstore/query.js"
+    },
+    "dependencies": {
+      "step": ">=0.0.3",
+      "pattern": ">=0.0.2"
+    }
 }
