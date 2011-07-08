@@ -74,6 +74,11 @@ This clears all the keys and triggers a compaction.  Only after the compact fini
 
 There are no indexes, however, nStore provides a simple query interface to get at data quickly and easily.  You can filter using `condition` expressions or plain functions.
 
+To use queries, you need to include the query addon.
+
+    var nStore = require('nstore');
+    nStore = nStore.extend(require('nstore/query')());
+
 ### Query as a single callback
 
 For convenience you can pass in a callback and get the results as a single object.
