@@ -1,5 +1,5 @@
 Object.freeze(Object.prototype);
-require.paths.unshift('../lib');
+require.paths.unshift("../../");
 global.assert = require('assert');
 global.fs = require('fs');
 global.Step = require('step');
@@ -25,7 +25,7 @@ function clean() {
   try {
     fs.unlinkSync('fixtures/new.db');
   } catch (err) {
-    if (err.errno !== process.ENOENT) {
+    if (err.code !== 'ENOENT') {
       throw err;
     }
   }

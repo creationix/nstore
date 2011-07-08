@@ -17,33 +17,32 @@ module.exports = function QueryPlugin() {
       }
       var keys = Object.keys(this.index);
       var counter = keys.length;
-	  if(keys.length === 0) {
-		  process.nextTick(function() {
-			  if (stream) stream.emit('end');
-			  if (callback) callback(null, results);
-		  });
-	  } else { 
-		  keys.forEach(function (key) {
-			  this.get(key, function (err, doc, key) {
-				  if (err) {
-					  if (stream) stream.emit('error', err);
-					  if (callback) callback(err);
-					  return;
-				  }
-				  if (filter(doc, key)) {
-					  if (stream) stream.emit('document', doc, key);
-					  if (callback) results[key] = doc;
-				  };
-				  counter--;
-				  if (counter === 0) {
-					  if (stream) stream.emit('end');
-					  if (callback) callback(null, results);
-				  }
-			  });
-		  }, this);
-	  }
+      if(keys.length === 0) {
+        process.nextTick(function() {
+          if (stream) stream.emit('end');
+          if (callback) callback(null, results);
+        });
+      } else { 
+        keys.forEach(function (key) {
+          this.get(key, function (err, doc, key) {
+            if (err) {
+              if (stream) stream.emit('error', err);
+              if (callback) callback(err);
+              return;
+            }
+            if (filter(doc, key)) {
+              if (stream) stream.emit('document', doc, key);
+              if (callback) results[key] = doc;
+            };
+            counter--;
+            if (counter === 0) {
+              if (stream) stream.emit('end');
+              if (callback) callback(null, results);
+            }
+          });
+        }, this);
+      }
     }
-
   };
 }
 
@@ -78,6 +77,6 @@ function compileSection(obj) {
       name = "doc." + name;
     }
     return "(" + name + " " + operator + " " + JSON.stringify(obj[key]) + ")";
-  })
+  });
   return "(" + parts.join(" && ") + ")";
 }

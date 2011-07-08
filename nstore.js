@@ -1,10 +1,10 @@
 var Path = require('path'),
-    fs = require('fs'),
+    Fs = require('fs'),
     Step = require('step'),
     Pattern = require('pattern'),
     Hash = require('pattern/hash'),
     Queue = require('pattern/queue'),
-    File = require('./file');
+    File = require('./lib/file');
 
 const CHUNK_LENGTH = 40 * 1024,
       TAB = 9,
@@ -53,11 +53,11 @@ var nStore = module.exports = Pattern.extend({
     var counter = 0;
     this.busy = true;
 
-    fs.open(this.filename, 'a+', 0666, function (err, fd) {
+    Fs.open(this.filename, 'a+', 0666, function (err, fd) {
       if (err) { callback(err); return; }
       var line = [0, null, null];
       function readChunk(position) {
-        fs.read(fd, buffer, 0, CHUNK_LENGTH, position, function (err, bytes) {
+        Fs.read(fd, buffer, 0, CHUNK_LENGTH, position, function (err, bytes) {
           if (err) throw err;
           if (!bytes) {
             scanned = position;
@@ -283,11 +283,11 @@ var nStore = module.exports = Pattern.extend({
   //     },
   //     function closeOld(err) {
   //       if (err) throw err;
-  //       fs.close(self.fd, this);
+  //       Fs.close(self.fd, this);
   //     },
   //     function moveNew(err) {
   //       if (err) throw err;
-  //       fs.rename(tmpFile, self.filename, this);
+  //       Fs.rename(tmpFile, self.filename, this);
   //     },
   //     function transitionState(err) {
   //       if (err) throw err;
