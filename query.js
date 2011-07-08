@@ -17,6 +17,7 @@ module.exports = function QueryPlugin() {
       }
       var keys = Object.keys(this.index);
       var counter = keys.length;
+      if (!counter) return callback(null, []);
       if(keys.length === 0) {
         process.nextTick(function() {
           if (stream) stream.emit('end');
