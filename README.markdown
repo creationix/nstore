@@ -27,7 +27,7 @@ Creating a database is easy, you just call the nStore function to generate a col
 To insert/update documents, just call the save function on the collection.
 
     // Insert a new document with key "creationix"
-    users.save("creationix", {name: "Tim Caswell": age: 28}, function (err) {
+    users.save("creationix", {name: "Tim Caswell", age: 29}, function (err) {
         if (err) { throw err; }
         // The save is finished and written to disk safely
     });
@@ -79,7 +79,7 @@ There are no indexes, however, nStore provides a simple query interface to get a
 For convenience you can pass in a callback and get the results as a single object.
 
     // Using a callback for buffered results
-    users.find({age: 28}, function (err, results) {
+    users.find({age: 29}, function (err, results) {
       // results is an object keyed by document key with the document as the value
     });
 
@@ -88,7 +88,7 @@ For convenience you can pass in a callback and get the results as a single objec
 
 Also you can stream results.
 
-    var stream = users.find({age: 28});
+    var stream = users.find({age: 29});
     stream.on("document", function (doc, key) {
       // This is a single document
     });
@@ -108,9 +108,9 @@ If you want no condition you can use the `all()` shortcut.
 
 A simple condition is pairs of key's and values.  This builds a condition where all columns named by the key must equal the corresponding value.
 
-This matches rows where `name` is `"Tim"` and `age` is `27`:
+This matches rows where `name` is `"Tim"` and `age` is `29`:
 
-    {name: "Tim", age: 27}
+    {name: "Tim", age: 29}
 
 If a key contains space, then the operator after it is used instead of equal.
 
