@@ -159,7 +159,7 @@ var nStore = module.exports = Pattern.extend({
     // Read from disk otherwise
     try {
       var info = this.index[key];
-      if (!info) {
+      if (!info || info.length == 0) {
         missing();
         return;
       }
