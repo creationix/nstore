@@ -1,6 +1,6 @@
 {
     "name": "nstore",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "description": "nStore is a simple, in-process key/value database for node.js.",
     "tags": ["nosql", "database", "pattern"],
     "author": "Tim Caswell <tim@creationix.com>",
