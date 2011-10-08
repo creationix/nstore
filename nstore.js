@@ -235,6 +235,7 @@ var nStore = module.exports = Pattern.extend({
           if (self.index.hasOwnProperty(key)) {
             self.stale++;
             if (value.length === 0) {
+              value = undefined;
               delete self.index[key];
             }
           }
