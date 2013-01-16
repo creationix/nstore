@@ -130,6 +130,24 @@ var nStore = module.exports = Pattern.extend({
     });
     this.checkQueue();
   },
+  
+  update: function update(key, attr, callback) {
+    var self = this;
+    Step(
+      function() {
+          self.get(key, this);
+      },
+      function(err, doc, key) {
+          if (err) throw err;
+          
+          for (attrKey in attr) {
+              doc[attrKey] = attr[attrKey];
+          }
+          
+          self.save(key, doc, callback)
+      }
+    );
+  }
 
   // Load a single record from the disk
   get: function getByKey(key, callback) {
