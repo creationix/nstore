@@ -84,7 +84,7 @@ var nStore = module.exports = Pattern.extend({
       readChunk(0);
 
       function check() {
-        if (counter === 0 && scanned !== undefined) {
+        if (counter === 0 && scanned !== false) {
           self.dbLength = scanned;
           self.index = index;
           self.fd = fd;
