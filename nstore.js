@@ -69,7 +69,7 @@ var nStore = module.exports = Pattern.extend({
             switch (buffer[i]) {
               case TAB:
                 line[1] = position + i;
-                next = NEWLINE;
+                var next = NEWLINE;
                 break;
               case NEWLINE:
                 line[2] = position + i;
