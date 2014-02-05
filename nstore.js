@@ -125,8 +125,8 @@ var nStore = module.exports = Pattern.extend({
     }
     this.toWrite[key] = doc;
     this.toWriteCallbacks.push(function (err) {
-      if (err) callback(err);
-      else callback(err, key);
+      if (err && typeof callback == 'function') callback(err);
+      else if (typeof callback == 'function') callback(err, key);
     });
     this.checkQueue();
   },
