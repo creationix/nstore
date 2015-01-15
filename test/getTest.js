@@ -1,3 +1,5 @@
+var Constants = require('constants');
+
 require('./helper');
 
 expect("load");
@@ -23,8 +25,8 @@ var users = nStore.new('fixtures/sample.db', function () {
   users.get("bob", function (err, doc, key) {
     fulfill("get missing");
     assert.ok(err instanceof Error, "error should be an Error");
-    if (err.errno !== process.ENOENT) throw err;
-    assert.equal(err.errno, process.ENOENT, "Error instance should be ENOENT");
+    if (err.errno !== Constants.ENOENT) throw err;
+    assert.equal(err.errno, Constants.ENOENT, "Error instance should be ENOENT");
     assert.ok(!doc, "no doc loaded");
     assert.ok(!key, "no key loaded");
   });
