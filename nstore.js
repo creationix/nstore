@@ -4,7 +4,8 @@ var Path = require('path'),
     Pattern = require('pattern'),
     Hash = require('pattern/hash'),
     Queue = require('pattern/queue'),
-    File = require('./lib/file');
+    File = require('./lib/file'),
+    Constants = require('constants');
 
 const CHUNK_LENGTH = 40 * 1024,
       TAB = 9,
@@ -135,7 +136,7 @@ var nStore = module.exports = Pattern.extend({
   get: function getByKey(key, callback) {
     function missing() {
       var error = new Error("Document does not exist for " + key);
-      error.errno = process.ENOENT;
+      error.errno = Constants.ENOENT;
       callback(error);
     }
     // Check the cache of just written values
@@ -320,7 +321,7 @@ var nStore = module.exports = Pattern.extend({
       var info = this.index[key];
       if (!info) {
         var error = new Error("Document does not exist for " + key);
-        error.errno = process.ENOENT;
+        error.errno = Constants.ENOENT;
         callback(error);
         return;
       }
