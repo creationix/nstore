@@ -125,8 +125,10 @@ var nStore = module.exports = Pattern.extend({
     }
     this.toWrite[key] = doc;
     this.toWriteCallbacks.push(function (err) {
-      if (err) callback(err);
-      else callback(err, key);
+      if(typeof callback !== 'undefined'){
+          if (err) callback(err);
+          else callback(err, key);
+      }
     });
     this.checkQueue();
   },
@@ -249,71 +251,6 @@ var nStore = module.exports = Pattern.extend({
       callback
     );
   },
-
-  // compactDatabase: function (clear, callback) {
-  //   if ((!clear && this.stale === 0) || this.busy) return;
-  //   var tmpFile = Path.join(Path.dirname(this.filename), this.genKey() + ".tmpdb"),
-  //       tmpDb;
-  //
-  //   this.busy = true;
-  //   var self = this;
-  //   Step(
-  //     function makeNewDb() {
-  //       tmpDb = nStore.new(tmpFile, this);
-  //     },
-  //     function copyData(err) {
-  //       if (err) throw err;
-  //       if (clear) return true;
-  //       var group = this.group();
-  //       var copy = Step.fn(
-  //         function (key) {
-  //           self.get(key, this);
-  //         },
-  //         function (err, doc, key) {
-  //           if (err) throw err;
-  //           if (self.filterFn && self.filterFn(doc, key)) {
-  //             return true;
-  //           }
-  //           tmpDb.save(key, doc, this);
-  //         }
-  //       );
-  //
-  //       self.index.forEach(function (info, key) {
-  //         copy(key, group());
-  //       });
-  //     },
-  //     function closeOld(err) {
-  //       if (err) throw err;
-  //       Fs.close(self.fd, this);
-  //     },
-  //     function moveNew(err) {
-  //       if (err) throw err;
-  //       Fs.rename(tmpFile, self.filename, this);
-  //     },
-  //     function transitionState(err) {
-  //       if (err) throw err;
-  //       self.dbLength = tmpDb.dbLength;
-  //       self.index = tmpDb.index;
-  //       self.fd = tmpDb.fd;
-  //       self.stale = tmpDb.stale;
-  //       return true;
-  //     },
-  //     function cleanup(err) {
-  //       self.busy = false;
-  //       process.nextTick(function () {
-  //         self.checkQueue();
-  //       });
-  //       if (err) throw err;
-  //       return true;
-  //     },
-  //     function prologue(err) {
-  //       if (callback) {
-  //         callback(err);
-  //       }
-  //     }
-  //   );
-  //
-  // },
 
   remove: function removeByKey(key, callback) {
     try {
